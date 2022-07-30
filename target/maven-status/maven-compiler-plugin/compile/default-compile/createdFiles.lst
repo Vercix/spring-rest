@@ -1,0 +1,5 @@
+com\example\restservice\RestServiceApplication.class
+com\example\restservice\BobController.class
+com\example\restservice\Greeting.class
+com\example\restservice\BobController$I.class
+com\example\restservice\StaticConfig.class
