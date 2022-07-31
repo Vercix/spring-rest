@@ -1,26 +1,30 @@
 import ReactDOM from 'react-dom';
 import React, { useRef, useState } from 'react';
+import useSWR from 'swr'
+import fetcher from './lib/fetcher';
+import ToDoTable from './components/ToDoTable';
+import ToDoForm from './components/ToDoForm';
 
 const App = () => {
-   const [tasks, setTasks] = useState([]);
-   const input = useRef(null);
+   const { data, error, mutate } = useSWR('/api/toDos', fetcher);
 
-   function onAddTask(e) {
-      e.preventDefault();
-      if (!input.current || !input.current.value) {
-         return;
-      }
-
-      setTasks([...tasks, input.current.value])
+   function onChange() {
+      mutate();
    }
 
    return (
       <>
-         <h2>To Do:</h2>
-         <input ref={input} placeholder={'Add task....'} />
-         <button onClick={(e) => onAddTask(e)}>ADD</button>
-         {tasks.length < 1 && <p>Nothing to do, relax!</p>}
-         {tasks.length > 0 && tasks.map(task => (<p key={task}>{task}</p>))}
+         {/* {data && <pre>{JSON.stringify(data._embedded.toDos, null, 2)}</pre>} */}
+         {!data && <div>loading...</div>}
+         {error && <div>failed to load</div>}
+         {data &&
+            <>
+               <h2>To Do:</h2>
+               <ToDoForm onSubmit={onChange}/>
+               {data._embedded.toDos.length < 1 && <p>Nothing to do, relax!</p>}
+               {data._embedded.toDos.length > 0 && <ToDoTable onTaskDone={onChange} toDos={data._embedded.toDos} />}
+            </>
+         }
       </>
    );
 }
