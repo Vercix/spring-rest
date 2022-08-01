@@ -40,9 +40,7 @@ spring.data.rest.base-path=/api
 ```
 This sets the base path for spring boot data rest to be served from.
 
-Specifivcally in this application it would serve 
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Specifically in this application it would serve 
 
 # Acknoledgments
 
