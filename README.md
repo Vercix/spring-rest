@@ -42,7 +42,7 @@ This sets the base path for spring boot data rest to be served from.
 
 Specifically in this application it would serve 
 
-# Acknoledgments
+# Acknowledgments
 
 This application is mainly based on [this](https://spring.io/guides/tutorials/react-and-spring-data-rest/) tutorial on the official spring website.
 
